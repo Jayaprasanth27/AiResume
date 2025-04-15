@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b74ea3fc-d2cb-439f-937b-c9628bc7e13d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/resume/templates/template-3.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/resume/templates/template-4.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(main)/resume/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(main)/resume/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/resume-preview.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/resume-preview.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/resume/templates/template-4.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/resume/templates/template-4.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +62,7 @@
       <option name="presentableId" value="Default" />
       <updated>1744735341859</updated>
       <workItem from="1744735342942" duration="2532000" />
-      <workItem from="1744738679296" duration="1644000" />
+      <workItem from="1744738679296" duration="2669000" />
     </task>
     <servers />
   </component>

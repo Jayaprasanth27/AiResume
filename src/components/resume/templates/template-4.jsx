@@ -53,19 +53,22 @@ const TemplateFour = forwardRef(({ resume }, ref) => {
                         <h2 className="text-xl font-semibold mb-2">Social Links</h2>
                         <Separator />
                         <div className="space-y-2">
-                            {socialLinks?.map((link, index) => (
-                                <p key={index} className="flex items-center gap-2">
-                                    <Globe className="w-4 h-4" />
-                                    <a
-                                        href={link.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-blue-600/80 hover:underline text-sm"
-                                    >
-                                        {link.title}
-                                    </a>
-                                </p>
-                            ))}
+                            {socialLinks?.map((link, index) => {
+                                const { title, url } = link || {}; // Deconstruct safely
+                                return url ? (
+                                    <p key={index} className="flex items-center gap-2">
+                                        <Globe className="w-4 h-4" />
+                                        <a
+                                            href={url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-blue-600/80 hover:underline text-sm"
+                                        >
+                                            {title || "Untitled"}
+                                        </a>
+                                    </p>
+                                ) : null; // Skip if url is missing
+                            })}
                         </div>
                     </div>
 
@@ -74,11 +77,13 @@ const TemplateFour = forwardRef(({ resume }, ref) => {
                         <h2 className="text-xl font-semibold mb-2">Skills</h2>
                         <Separator />
                         <div className="flex flex-wrap gap-2 mt-2">
-                            {techSkills?.split(",").map((skill, index) => (
-                                <Badge key={index} variant="secondary">
-                                    {skill}
-                                </Badge>
-                            ))}
+                            {typeof techSkills === "string"
+                                ? techSkills.split(",").map((skill, index) => (
+                                    <Badge key={index} variant="secondary">
+                                        {skill.trim()}
+                                    </Badge>
+                                ))
+                                : <p className="text-sm text-muted-foreground">No skills provided</p>}
                         </div>
                     </div>
                 </div>
@@ -98,21 +103,28 @@ const TemplateFour = forwardRef(({ resume }, ref) => {
                     <Card className="border-none shadow-none bg-transparent">
                         <CardContent>
                             <h2 className="text-2xl font-semibold mb-2">Experience</h2>
-                            {experience?.map((exp, index) => (
-                                <div key={index} className="space-y-2 mb-4">
-                                    <h3 className="font-bold text-base">
-                                        {exp.jobRole} - {exp.companyName}
-                                    </h3>
-                                    <p className="text-sm text-muted-foreground">
-                                        {exp.startDate} - {exp.endDate || "Present"}
-                                    </p>
-                                    <ul className="list-disc list-inside text-sm text-muted-foreground mt-2">
-                                        {exp.description?.split("/").map((desc, i) => (
-                                            <li key={i}>{desc}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))}
+                            {Array.isArray(experience) && experience.length > 0 ? (
+                                experience.map((exp, index) => {
+                                    const { jobRole, companyName, startDate, endDate, description } = exp || {};
+                                    return jobRole && companyName ? (
+                                        <div key={index} className="space-y-2 mb-4">
+                                            <h3 className="font-bold text-base">
+                                                {jobRole} - {companyName}
+                                            </h3>
+                                            <p className="text-sm text-muted-foreground">
+                                                {startDate || "N/A"} - {endDate || "Present"}
+                                            </p>
+                                            <ul className="list-disc list-inside text-sm text-muted-foreground mt-2">
+                                                {description?.split("/").map((desc, i) => (
+                                                    <li key={i}>{desc || "No details available"}</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    ) : null; // Skip invalid entries
+                                })
+                            ) : (
+                                <p className="text-sm text-muted-foreground">No experience available</p>
+                            )}
                         </CardContent>
                     </Card>
                     <Separator />
@@ -137,21 +149,29 @@ const TemplateFour = forwardRef(({ resume }, ref) => {
                     <Card className="border-none shadow-none bg-transparent">
                         <CardContent>
                             <h2 className="text-2xl font-semibold mb-2">Projects</h2>
-                            {projects?.map((proj, index) => (
-                                <div key={index} className="space-y-1 mb-4">
-                                    <h3 className="font-bold text-base">{proj.title}</h3>
-                                    <p className="text-sm text-muted-foreground">
-                                        {proj.startDate} - {proj.endDate || "Present"}
-                                    </p>
-                                    <ul className="list-disc list-inside text-sm text-muted-foreground mt-2">
-                                        {proj.description?.split("/").map((desc, i) => (
-                                            <li key={i}>{desc}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))}
+                            {Array.isArray(projects) && projects.length > 0 ? (
+                                projects.map((proj, index) => {
+                                    const { title, startDate, endDate, description } = proj || {};
+                                    return title ? (
+                                        <div key={index} className="space-y-1 mb-4">
+                                            <h3 className="font-bold text-base">{title}</h3>
+                                            <p className="text-sm text-muted-foreground">
+                                                {startDate || "N/A"} - {endDate || "Present"}
+                                            </p>
+                                            <ul className="list-disc list-inside text-sm text-muted-foreground mt-2">
+                                                {description?.split("/").map((desc, i) => (
+                                                    <li key={i}>{desc || "No details available"}</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    ) : null; // Skip invalid projects
+                                })
+                            ) : (
+                                <p className="text-sm text-muted-foreground">No projects available</p>
+                            )}
                         </CardContent>
                     </Card>
+
                     <Separator />
 
                     {/* Achievements */}
