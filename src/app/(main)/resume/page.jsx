@@ -350,6 +350,8 @@ export default function ResumePage() {
             resume={resume || sampleResumeData}
             templateOneRef={templateRef}
             templateTwoRef={templateRef}
+            templateThreeRef={templateRef}
+            templateFourRef={templateRef}
           />
         </TabsContent>
       </Tabs>

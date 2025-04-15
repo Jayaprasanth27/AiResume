@@ -4,9 +4,12 @@ import Image from "next/image";
 import { useState } from "react";
 import TemplateOne from "./resume/templates/template-1";
 import ResumeTemplate from "./resume/templates/template-2";
+import TemplateThree from "./resume/templates/template-3";
+import TemplateFour from "./resume/templates/template-4";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
-const ResumePreview = ({ resume, templateOneRef, templateTwoRef }) => {
+const ResumePreview = ({ resume, templateOneRef, templateTwoRef, templateThreeRef, templateFourRef }) => {
   const [activeTab, setActiveTab] = useState("templateOne");
 
   return (
@@ -34,6 +37,22 @@ const ResumePreview = ({ resume, templateOneRef, templateTwoRef }) => {
                 height={100}
               />
             </TabsTrigger>
+            <TabsTrigger value="templateThree">
+              <Image
+                  src="/resume-template-2.png"
+                  alt="resume-template-3"
+                  width={100}
+                  height={100}
+              />
+            </TabsTrigger>
+            <TabsTrigger value="templateFour">
+              <Image
+                  src="/resume-template-2.png"
+                  alt="resume-template-4"
+                  width={100}
+                  height={100}
+              />
+            </TabsTrigger>
           </TabsList>
         </div>
 
@@ -43,6 +62,12 @@ const ResumePreview = ({ resume, templateOneRef, templateTwoRef }) => {
           </TabsContent>
           <TabsContent value="templateTwo" className="col-span-2">
             <ResumeTemplate resume={resume} ref={templateTwoRef} />
+          </TabsContent>
+          <TabsContent value="templateThree" className="col-span-2">
+            <TemplateThree resume={resume} ref={templateThreeRef} />
+          </TabsContent>
+          <TabsContent value="templateFour" className="col-span-2">
+            <TemplateFour resume={resume} ref={templateFourRef} />
           </TabsContent>
         </div>
       </Tabs>
